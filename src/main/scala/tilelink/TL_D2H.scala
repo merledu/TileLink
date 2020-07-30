@@ -3,7 +3,6 @@ import chisel3._
 
 // TileLink Device To Host (Channel D ports) TL_D2H
 class TL_D2H(implicit val conf: TLConfiguration) extends Bundle {
-  val d_ready = Input(Bool())
   val d_valid = Output(Bool())
   val d_opcode = Output(UInt(3.W))
   val d_param = Output(UInt(3.W))

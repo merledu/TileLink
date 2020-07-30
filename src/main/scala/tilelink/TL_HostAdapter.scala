@@ -14,7 +14,7 @@ class TL_HostAdapter(implicit val conf: TLConfiguration) extends Module {
     val corr_o = Output(Bool())
 
     val tl_o = new TL_H2D()
-    val tl_i = new TL_D2H()
+    val tl_i = Flipped(new TL_D2H())
   })
 
   when(reset.asBool()) {

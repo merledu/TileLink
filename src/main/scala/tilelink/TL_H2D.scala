@@ -11,6 +11,5 @@ class TL_H2D(implicit val conf: TLConfiguration) extends Bundle {
   val a_address = Output(UInt(conf.TL_AW.W))
   val a_mask = Output(UInt(conf.TL_DBW.W))
   val a_data = Output(UInt(conf.TL_DW.W))
-  val a_corrupt = Output(Bool())
   val d_ready = Output(Bool())
 }

@@ -12,11 +12,12 @@ class TL_HostAdapter(implicit val conf: TLConfiguration) extends Module {
     val be_i = Input(UInt(conf.TL_DBW.W))
     val valid_o = Output(Bool())
     val rdata_o = Output(UInt(conf.TL_DW.W))
-    val corr_o = Output(Bool())
+    val err_o = Output(Bool())
 
     val tl_o = new TL_H2D()
     val tl_i = Flipped(new TL_D2H())
   })
+
 
   when(reset.asBool()) {
     io.tl_o.a_valid := false.B  // spec pg 11 during RESET the a_valid from master must be low
@@ -42,6 +43,6 @@ class TL_HostAdapter(implicit val conf: TLConfiguration) extends Module {
   io.gnt_o := io.tl_i.a_ready
   io.valid_o := io.tl_i.d_valid
   io.rdata_o := io.tl_i.d_data
-  io.corr_o := io.tl_i.d_corrupt
+  io.err_o := io.tl_i.d_error
 
 }

@@ -1,7 +1,7 @@
 package tilelink
-
+import chisel3._
 object TL_A_Opcode {
-  val get = 0x4
-  val putFullData = 0x0
-  val putPartialData = 0x1
+  val get = 4.U
+  val putFullData = 0.U
+  val putPartialData = 1.U
 }

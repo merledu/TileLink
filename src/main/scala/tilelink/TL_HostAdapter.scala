@@ -31,7 +31,7 @@ class TL_HostAdapter(implicit val conf: TLConfiguration) extends Module {
   tl_be := Mux(io.we_i, io.be_i, 1.U) // Using a mux to conditionally assign value to byte enable wire (tl_be)
 
   io.tl_o.a_valid := io.req_i
-  io.tl_o.a_opcode := Mux(io.we_i, Mux((io.be_i & 1.U) === io.be_i, TL_A_Opcode.putFullData, TL_A_Opcode.putPartialData), TL_A_Opcode.get)
+  io.tl_o.a_opcode := Mux(io.we_i, Mux(io.be_i.andR, TL_A_Opcode.putFullData, TL_A_Opcode.putPartialData), TL_A_Opcode.get) // .andR is AND reduction that return true if all bits are set.
   io.tl_o.a_param := 0.U
   io.tl_o.a_size := wordSize.asUInt(conf.TL_SZW.W)
   io.tl_o.a_mask := tl_be

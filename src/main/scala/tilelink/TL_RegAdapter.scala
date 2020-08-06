@@ -53,14 +53,16 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   io.wdata_o := io.tl_i.a_data
   io.be_o := io.tl_i.a_mask
 
-  when(!reset.asBool) {
+  when(reset.asBool) {
     outstanding := false.B
     reqId := 0.U
     reqSz := 0.U
     respOp := TL_D_Opcode.accessAck
     rdata := 0.U
     error := false.B
-  } .elsewhen(a_ack) {
+  }
+
+  when(a_ack) {
     outstanding := true.B
     reqId := io.tl_i.a_source
     reqSz := io.tl_i.a_size
@@ -70,7 +72,7 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   } .elsewhen(d_ack) {
     outstanding := false.B
   } .otherwise {
-    outstanding := DontCare
+    outstanding := false.B
   }
 
   io.tl_o.a_ready := !outstanding

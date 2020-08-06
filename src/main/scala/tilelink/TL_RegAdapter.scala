@@ -71,8 +71,18 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
     error := io.error_i || err_internal
   } .elsewhen(d_ack) {
     outstanding := false.B
+    reqId := DontCare
+    reqSz := DontCare
+    respOp := DontCare
+    rdata := DontCare
+    error := DontCare
   } .otherwise {
     outstanding := false.B
+    reqId := DontCare
+    reqSz := DontCare
+    respOp := DontCare
+    rdata := DontCare
+    error := DontCare
   }
 
   io.tl_o.a_ready := !outstanding
@@ -94,5 +104,5 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   }
 
   // seperate tl_err checker which needs to be seen
-
+  tl_err := false.B
 }

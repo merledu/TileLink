@@ -25,20 +25,22 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   val a_ack = Wire(Bool())
   val d_ack = Wire(Bool())
 
-  val rdata = Wire(UInt(regDw.W))
-  val error = Wire(Bool())
+  val rdata = RegInit(0.U(regDw.W))
+  val error = RegInit(0.U(1.W))
+
   val err_internal = Wire(Bool())
   val addr_align_err = Wire(Bool())
   val tl_err = Wire(Bool())
 
-  val reqId = Wire(UInt(conf.TL_AIW.W))
-  val reqSz = Wire(UInt(conf.TL_SZW.W))
-  val respOp = Wire(UInt(3.W))
+  val reqId = RegInit(0.U(conf.TL_AIW.W))
+  val reqSz = RegInit(0.U(conf.TL_SZW.W))
+  val respOp = RegInit(TL_D_Opcode.accessAck)
 
   val rd_req = Wire(Bool())
   val wr_req = Wire(Bool())
 
-  val outstanding = Wire(Bool())
+  val outstanding = RegInit(0.U(1.W))
+
 
   a_ack := io.tl_i.a_valid && io.tl_o.a_ready
   d_ack := io.tl_o.d_valid && io.tl_i.d_ready
@@ -53,36 +55,16 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   io.wdata_o := io.tl_i.a_data
   io.be_o := io.tl_i.a_mask
 
-  when(reset.asBool) {
-    outstanding := false.B
-    reqId := 0.U
-    reqSz := 0.U
-    respOp := TL_D_Opcode.accessAck
-    rdata := 0.U
-    error := false.B
-  }
 
   when(a_ack) {
-    outstanding := true.B
+    outstanding := 1.U
     reqId := io.tl_i.a_source
     reqSz := io.tl_i.a_size
     respOp := Mux(rd_req, TL_D_Opcode.accessAckData, TL_D_Opcode.accessAck)
     rdata := Mux(err_internal, 1.U, io.rdata_i)
     error := io.error_i || err_internal
   } .elsewhen(d_ack) {
-    outstanding := false.B
-    reqId := DontCare
-    reqSz := DontCare
-    respOp := DontCare
-    rdata := DontCare
-    error := DontCare
-  } .otherwise {
-    outstanding := false.B
-    reqId := DontCare
-    reqSz := DontCare
-    respOp := DontCare
-    rdata := DontCare
-    error := DontCare
+    outstanding := 0.U
   }
 
   io.tl_o.a_ready := !outstanding

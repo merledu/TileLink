@@ -16,6 +16,17 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
 | 1 | Slave returns (2^1 = 2 bytes) in AccessAckData |
 | 2 | Slave returns (2^2 = 4 bytes) in AccessAckData |
 
+#### PutFullData
+`a_size` indicates the total amount of data the requesting agent wishes to write in terms of _log2(bytes)_. Although, the specification allows `a_size` to represent any value but `PutFullData` should always set `a_size = 2` for a 32-bit wide data bus or `a_size = 3` for a 64-bit wide data bus.
+
+#### Possbilities of a_size in PutFullData
+
+| a_size | Interpretation (2^a_size) bytes |
+| ------ | --------- |
+| 2 | Host intends to write (2^2 = 4 bytes) data on the data bus
+
+
+
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown

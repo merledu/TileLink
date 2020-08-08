@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to the TL-UL Implementation Specification
 
-You can use the [editor on GitHub](https://github.com/hadirkhan10/TileLink/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+This page is dedicated for the implementation specification of the TileLink Uncached Lightweight (TL-UL) protocol.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf) provided by SiFive.
 
 ### Markdown
 

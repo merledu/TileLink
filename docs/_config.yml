@@ -1,2 +1,2 @@
-theme: jekyll-theme-slate
+theme: jekyll-theme-leap-day
 extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "strikethrough", "superscript", "with_toc_data"]

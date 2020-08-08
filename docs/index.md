@@ -65,6 +65,22 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | 1 | Device accessed (2^1 = 2 bytes) of data
 | 2 | Device accessed (2^2 = 4 bytes) of data
 
+### a_mask functionality
+`a_mask`indicates the byte lanes that are active for the current operation. The `a_mask` signal bit width is identified by Data Bus Width (DBW)/8 which gives 4 bit width for a 32 bit Data Bus. If all the `a_mask` bits are set `1111` it means that all byte lanes are active.
+
+#### Get
+`a_mask` selects the byte lanes to read from the data that is received in `AccessAckData`. The `a_size` describes the size of the data received (1 Byte, 2 Bytes, 3 Bytes, 4 Bytes) and the `a_mask` selects from which byte lane to read the data.
+
+#### Possbilities of a_mask in Get
+
+
+| a_size[1:0] | a_mask[3:0] | Description
+| ------ | ------ | ----------- |
+| 0 | 'b0001 | `a_mask='b0001` means to read zeroth byte lane from the received data.
+| 0 | 'b0010 | `a_mask='b0010` means to read first byte lane from the received data.
+| 0 | 'b0100 | `a_mask='b0100` means to read second byte lane from the received data.
+| 0 | 'b1000 | `a_mask='b1000` means to read third byte lane from the received data.
+
 
 ### Support or Contact
 

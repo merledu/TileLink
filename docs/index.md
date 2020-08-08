@@ -76,10 +76,10 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 
 | a_size[1:0] | a_mask[3:0] | Description
 | ------ | ------ | ----------- |
-| 0 | 'b0001 | `a_mask='b0001` means to read zeroth byte lane from the received data.
-| 0 | 'b0010 | `a_mask='b0010` means to read first byte lane from the received data.
-| 0 | 'b0100 | `a_mask='b0100` means to read second byte lane from the received data.
-| 0 | 'b1000 | `a_mask='b1000` means to read third byte lane from the received data.
+| 0 | 'b0001 | Read zeroth byte lane from the received data.
+| 0 | 'b0010 | Read first byte lane from the received data.
+| 0 | 'b0100 | Read second byte lane from the received data.
+| 0 | 'b1000 | Read third byte lane from the received data.
 
 
 ### Support or Contact

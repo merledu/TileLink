@@ -39,7 +39,7 @@ For all the Host (Master) messages listed below (Get, PutPartialData, PutFullDat
 | 1 | Host intends to write (2^1 = 2 bytes) of data on the data bus
 | 2 | Host intends to write (2^2 = 4 bytes) of data on the data bus
 
-### `d_size` functionality
+### d_size functionality
 For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the `d_size` in terms of log2(bytes) cannot be greater than the physical data bus width in TL-UL and must always be in correspondence with `a_size`.
 
 #### AccessAck

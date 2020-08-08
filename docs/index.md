@@ -17,9 +17,9 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
   
   | a_size | Interpretation (2^a_size) bytes |
 |-------|--------|
-| ambrosia | gala | 
-| pink lady | jazz |
-| honeycrisp | granny smith |
+| 0 | Slave returns (2^0 = 1 byte) in AccessAckData | 
+| 1 | Slave returns (2^1 = 2 bytes) in AccessAckData |
+| 2 | Slave returns (2^2 = 4 bytes) in AccessAckData |
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 

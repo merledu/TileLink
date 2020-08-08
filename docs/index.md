@@ -5,6 +5,8 @@ This page is dedicated for the implementation specification of the TileLink Unca
 The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf) provided by SiFive.
 
 ### a_size functionality
+For all the Host (Master) messages listed below (Get, PutPartialData, PutFullData) the `a_size` in terms of log2(bytes) cannot be greater than the physical data bus width in TL-UL. For example, if the physical data bus width is 32 bits then `a_size <= 2` since 2^a_size -> 2^2 -> 4 bytes.
+
 #### Get
 `a_size` indicates the total amount of data the requesting agent wishes to read in terms of _log2(bytes)_. `a_size` represents the size of the resulting `AccessAckData` response.
 
@@ -23,7 +25,19 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
 
 | a_size | Interpretation (2^a_size) bytes |
 | ------ | --------- |
-| 2 | Host intends to write (2^2 = 4 bytes) data on the data bus
+| 2 | Host intends to write (2^2 = 4 bytes) of data on the data bus
+
+
+#### PutPartialData
+`a_size` indicates how many bytes are transmitted in terms of _log2(bytes)_. As compared to `PutFullData`, the `PutPartialData` can write data at byte granuality using the `a_size` and `a_mask` properties. The `a_size` can indicate a byte, two bytes, three bytes as well as four bytes.
+
+#### Possbilities of a_size in PutPartialData
+
+| a_size | Interpretation (2^a_size) bytes |
+| ------ | --------- |
+| 0 | Host intends to write (2^0 = 1 byte) of data on the data bus
+| 1 | Host intends to write (2^1 = 2 bytes) of data on the data bus
+| 2 | Host intends to write (2^2 = 4 bytes) of data on the data bus
 
 
 

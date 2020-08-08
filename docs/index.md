@@ -15,7 +15,7 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
   1      | Slave returns (2<sup>1</sup> = 2 bytes) in AccessAckData  
   2      | Slave returns (2<sup>2</sup> = 4 bytes) in AccessAckData
   
-  | Priority apples | Second priority | Third priority |
+  | a_size | Interpretation (2<sup>a_size</sup>) bytes | Third priority |
 |-------|--------|---------|
 | ambrosia | gala | red delicious |
 | pink lady | jazz | macintosh |

@@ -29,7 +29,7 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
 <thead>
 <tr class="header">
 <th>a_size</th>
-<th>Interpretation (2<sup>a_size</sup>) bytes </th>
+<th markdown="span">Interpretation 2<sup>a_size</sup> bytes </th>
 </tr>
 </thead>
 <tbody>

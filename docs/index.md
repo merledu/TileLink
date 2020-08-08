@@ -74,12 +74,20 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 #### Possbilities of a_mask in Get
 
 
-| a_size[1:0] | a_mask[3:0] | Description
-| :------: | :------: | ----------- |
-| 0 | 'b0001 | Read zeroth byte lane from the received data.
-| 0 | 'b0010 | Read first byte lane from the received data.
-| 0 | 'b0100 | Read second byte lane from the received data.
-| 0 | 'b1000 | Read third byte lane from the received data.
+| a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
+| :------: | :-----: | :------: | ----------- |
+| 'd0 | 1 byte | 'b0001 | Read zeroth byte lane from the received data.
+| 'd0 | 1 byte | 'b0010 | Read first byte lane from the received data.
+| 'd0 | 1 byte | 'b0100 | Read second byte lane from the received data.
+| 'd0 | 1 byte | 'b1000 | Read third byte lane from the received data.
+| 'd1 | 2 bytes |'b0011 | Read the zeroth and first byte lane from the received data.
+| 'd1 | 2 bytes |'b0110 | Read the first and second byte lane from the received data.
+| 'd1 | 2 bytes |'b1100 | Read the second and third byte lane from the received data.
+| 'd2 | 4 bytes |'b0111 | Read the zeroth, first and second byte lane from the received data.
+| 'd2 | 4 bytes |'b1110 | Read the first, second and third byte lane from the received data.
+| 'd2 | 4 bytes |'b1111 | Read all byte lanes from the received data.
+
+**Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above.
 
 
 ### Support or Contact

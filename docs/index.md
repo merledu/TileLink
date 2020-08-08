@@ -73,7 +73,6 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 
 #### Possbilities of a_mask in Get
 
-
 | a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
 | :------: | :-----: | :------: | ----------- |
 | 'd0 | 1 byte | 'b0001 | Read zeroth byte lane from the received data.
@@ -97,6 +96,22 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
 | :------: | :-----: | :------: | ----------- |
 | 'd2 | 4 byte | 'b1111 | Write all byte lanes of the data.
+
+#### PutPartialData
+`a_mask` selects the byte lanes to be written. During `PutPartialData` the `a_size` can be either 0, 1 or 2 and `a_mask` will select the corresponding byte lane to write.
+
+| a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
+| :------: | :-----: | :------: | ----------- |
+| 'd0 | 1 byte | 'b0001 | Write zeroth byte lane of the data.
+| 'd0 | 1 byte | 'b0010 | Write first byte lane of the data.
+| 'd0 | 1 byte | 'b0100 | Write second byte lane of the data.
+| 'd0 | 1 byte | 'b1000 | Write third byte lane of the data.
+| 'd1 | 2 bytes |'b0011 | Write the zeroth and first byte lane of the data.
+| 'd1 | 2 bytes |'b0110 | Write the first and second byte lane of the data.
+| 'd1 | 2 bytes |'b1100 | Write the second and third byte lane of the data.
+| 'd2 | 4 bytes |'b0111 | Write the zeroth, first and second byte lane of the data.
+| 'd2 | 4 bytes |'b1110 | Write the first, second and third byte lane of the data.
+| 'd2 | 4 bytes |'b1111 | Write all byte lanes of the data.
 
 
 

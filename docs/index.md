@@ -89,6 +89,17 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 
 **Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above.
 
+#### PutFullData
+`a_mask` selects the byte lanes to be written. One HIGH bit of `a_mask` indicates one byte written. Whenever `PutFullData` is active then `a_size = 2` and all the bits of `a_mask` must be set `a_mask = 1111` in order to write all byte lanes. 
+
+#### Possbilities of a_mask in PutFullData
+
+| a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
+| :------: | :-----: | :------: | ----------- |
+| 'd2 | 4 byte | 'b1111 | Write all byte lanes of the data.
+
+
+
 
 ### Support or Contact
 

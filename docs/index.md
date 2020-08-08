@@ -15,35 +15,11 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
   1      | Slave returns (2<sup>1</sup> = 2 bytes) in AccessAckData  
   2      | Slave returns (2<sup>2</sup> = 4 bytes) in AccessAckData
   
-  | a_size | Interpretation (2<sup>a_size</sup>) bytes | Third priority |
-|-------|--------|---------|
-| ambrosia | gala | red delicious |
-| pink lady | jazz | macintosh |
-| honeycrisp | granny smith | fuji |
-
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>a_size</th>
- <th markdown="span">Interpretation </br>2<sup>a_size</sup> bytes </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td markdown="span">First column **fields**</td>
-<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link][mydoc_tags].</td>
-</tr>
-<tr>
-<td markdown="span">Second column **fields**</td>
-<td markdown="span">Some more descriptive text.
-</td>
-</tr>
-</tbody>
-</table>
+  | a_size | Interpretation (2^a_size) bytes |
+|-------|--------|
+| ambrosia | gala | 
+| pink lady | jazz |
+| honeycrisp | granny smith |
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 

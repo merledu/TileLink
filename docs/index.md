@@ -57,7 +57,7 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 #### AccessAckData
 `d_size` indicates the size of the data accessed by the device and is included in the response message along with `d_data` which contains the actual data payload, and other d channel properties. `d_size` must always correspond with the `a_size` which the host sets while sending a request to the device.
 
-#### Possbilities of d_size in AccessAck
+#### Possbilities of d_size in AccessAckData
 
 | d_size | Interpretation (2^d_size) bytes |
 | ------ | --------- |

@@ -5,7 +5,15 @@ This page is dedicated for the implementation specification of the TileLink Unca
 The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf) provided by SiFive.
 
 ### a_size functionality
-### `Get`
+#### Get
+`a_size` indicates the total amount of data the requesting agent wishes to read in terms of _log2(bytes)_. `a_size` represents the size of the resulting `AccessAckData` response.
+
+#### Possbilities of a_size in Get
+| a_size  | Interpretation (2<sup>a_size</sup>) bytes                 | 
+| :------:|:--------------------------------------------------------  |
+| 0       | Slave returns (2<sup>0</sup> = 1 byte) in AccessAckData   |
+| 1       | Slave returns (2<sup>1</sup> = 2 bytes) in AccessAckData  |
+| 2       | Slave returns (2<sup>2</sup> = 4 bytes) in AccessAckData  |
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 

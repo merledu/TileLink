@@ -14,6 +14,12 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
   0      | Slave returns (2<sup>0</sup> = 1 byte) in AccessAckData   
   1      | Slave returns (2<sup>1</sup> = 2 bytes) in AccessAckData  
   2      | Slave returns (2<sup>2</sup> = 4 bytes) in AccessAckData
+  
+  | Priority apples | Second priority | Third priority |
+|-------|--------|---------|
+| ambrosia | gala | red delicious |
+| pink lady | jazz | macintosh |
+| honeycrisp | granny smith | fuji |
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 

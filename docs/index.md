@@ -21,6 +21,30 @@ The TL-UL protocol conforms to the [Tilelink 1.7.1 specification](https://sifive
 | pink lady | jazz | macintosh |
 | honeycrisp | granny smith | fuji |
 
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>a_size</th>
+<th>Interpretation (2<sup>a_size</sup>) bytes </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td markdown="span">First column **fields**</td>
+<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link][mydoc_tags].</td>
+</tr>
+<tr>
+<td markdown="span">Second column **fields**</td>
+<td markdown="span">Some more descriptive text.
+</td>
+</tr>
+</tbody>
+</table>
+
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown

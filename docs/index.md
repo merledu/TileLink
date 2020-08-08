@@ -39,34 +39,33 @@ For all the Host (Master) messages listed below (Get, PutPartialData, PutFullDat
 | 1 | Host intends to write (2^1 = 2 bytes) of data on the data bus
 | 2 | Host intends to write (2^2 = 4 bytes) of data on the data bus
 
+### `d_size` functionality
+For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the `d_size` in terms of log2(bytes) cannot be greater than the physical data bus width in TL-UL and must always be in correspondence with `a_size`.
+
+#### AccessAck
+`d_size` indicates the size of the data written by the slave device. This should always correspond to the `a_size` that was received when the Host initiated the request.
 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+#### Possbilities of d_size in AccessAck
 
-```markdown
-Syntax highlighted code block
+| d_size | Interpretation (2^d_size) bytes |
+| ------ | --------- |
+| 0 | Device wrote (2^0 = 1 byte) of data
+| 1 | Device wrote (2^1 = 2 bytes) of data
+| 2 | Device wrote (2^2 = 4 bytes) of data
 
-# Header 1
-## Header 2
-### Header 3
+#### AccessAckData
+`d_size` indicates the size of the data accessed by the device and is included in the response message along with `d_data` which contains the actual data payload, and other d channel properties. `d_size` must always correspond with the `a_size` which the host sets while sending a request to the device.
 
-- Bulleted
-- List
+#### Possbilities of d_size in AccessAck
 
-1. Numbered
-2. List
+| d_size | Interpretation (2^d_size) bytes |
+| ------ | --------- |
+| 0 | Device accessed (2^0 = 1 byte) of data
+| 1 | Device accessed (2^1 = 2 bytes) of data
+| 2 | Device accessed (2^2 = 4 bytes) of data
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hadirkhan10/TileLink/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Having trouble with the documentation? Please open an issue [here](https://github.com/hadirkhan10/TileLink/issues) defining the problem you are facing or any question you have.

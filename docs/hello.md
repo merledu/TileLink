@@ -1,7 +1,5 @@
 ---
 title: Hello world
-layout: template
-theme: jekyll-theme-slate
 filename: hello.md
 --- 
 

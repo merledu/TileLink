@@ -120,6 +120,7 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | ... | ... |... | Other non contiguous possibilities
 | 'd2 | 4 bytes |'b1111 | Write all byte lanes of the data.
 
+**Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above. The `a_mask` bits can be non-contiguous for `PutPartialData`. This is allowed by the specification. See [Section 6.2.3 PutPartialData](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf)
 
 
 

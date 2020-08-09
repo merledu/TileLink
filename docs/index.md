@@ -86,7 +86,7 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | 'd2 | 4 bytes |'b1110 | Read the first, second and third byte lane from the received data.
 | 'd2 | 4 bytes |'b1111 | Read all byte lanes from the received data.
 
-**Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above.
+**Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above. The `a_mask` bits are contiguous i.e they are side by side an not like `b1001` and so on. This is not allowed by the specification.
 
 #### PutFullData
 `a_mask` selects the byte lanes to be written. One HIGH bit of `a_mask` indicates one byte written. Whenever `PutFullData` is active then `a_size = 2` and all the bits of `a_mask` must be set `a_mask = 1111` in order to write all byte lanes. 
@@ -96,6 +96,8 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | a_size[1:0] | Size in Bytes (2^a_size) | a_mask[3:0] | Description
 | :------: | :-----: | :------: | ----------- |
 | 'd2 | 4 byte | 'b1111 | Write all byte lanes of the data.
+
+**Note**: The 'd represents decimal representation and 'b represents the binary representation in the table above. The `a_mask` bits are contiguous i.e they are side by side an not like `b1001` and so on. This is not allowed by the specification.
 
 #### PutPartialData
 `a_mask` selects the byte lanes to be written. During `PutPartialData` the `a_size` can be either 0, 1 or 2 and `a_mask` will select the corresponding byte lane to write.
@@ -109,8 +111,13 @@ For all the Device (Slave) messages listed below (AccessAck, AccessAckData) the 
 | 'd1 | 2 bytes |'b0011 | Write the zeroth and first byte lane of the data.
 | 'd1 | 2 bytes |'b0110 | Write the first and second byte lane of the data.
 | 'd1 | 2 bytes |'b1100 | Write the second and third byte lane of the data.
+| 'd1 | 2 bytes |'b1001 | Write the zeroth and third byte lane of the data.
+| 'd1 | 2 bytes |'b1010 | Write the first and third byte lane of the data.
+| ... | ... |... | Other non contiguous possibilities
 | 'd2 | 4 bytes |'b0111 | Write the zeroth, first and second byte lane of the data.
 | 'd2 | 4 bytes |'b1110 | Write the first, second and third byte lane of the data.
+| 'd2 | 4 bytes |'b1101 | Write the zeroth, second and third byte lane of the data.
+| ... | ... |... | Other non contiguous possibilities
 | 'd2 | 4 bytes |'b1111 | Write all byte lanes of the data.
 
 

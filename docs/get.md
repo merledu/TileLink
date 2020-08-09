@@ -11,4 +11,4 @@ This configuration means that the master wants to read a single byte of data. It
 
 For this overview we will assume the following memory organization
 
-![Memory](/docs/assets/tilelink.png)
+![Memory](https://github.com/hadirkhan10/TileLink/blob/master/docs/assets/tilelink.png)

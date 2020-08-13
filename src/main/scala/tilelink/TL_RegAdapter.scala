@@ -85,6 +85,8 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
     addr_align_err := false.B
   }
 
-  // seperate tl_err checker which needs to be seen
-  tl_err := false.B
+  // separate tl_err checker which checks the address, size and mask correspondence according to the spec.
+  val tlErr = Module(new TL_Err)
+  tlErr.io.tl_i := io.tl_i
+  tl_err := tlErr.io.err_o
 }

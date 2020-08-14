@@ -14,3 +14,10 @@ object TL_RegAdapterMain extends App {
     c => new TL_RegAdapterUnitTester(c)
   }
 }
+
+object TLSocket1_NMain extends App {
+  implicit val tl_conf = TLConfiguration()
+  iotesters.Driver.execute(args, () => new TLSocket1_N(4)) {
+    c => new TLSocket1_NUnitTester(c)
+  }
+}

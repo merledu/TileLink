@@ -21,3 +21,10 @@ object TLSocket1_NMain extends App {
     c => new TLSocket1_NUnitTester(c)
   }
 }
+
+object TL_ErrRespMain extends App {
+  implicit val tl_conf = TLConfiguration()
+  iotesters.Driver.execute(args, () => new TL_ErrResp) {
+    c => new TL_ErrRespUnitTester(c)
+  }
+}

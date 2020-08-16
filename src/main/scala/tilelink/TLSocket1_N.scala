@@ -53,7 +53,6 @@ class TLSocket1_N(N: Int)(implicit val conf: TLConfiguration) extends Module {
     }
   }
 
-  // these outputs will eventually be connected with the error responder module
   tl_err_h_o.a_valid := io.tl_h_i.a_valid && (io.dev_sel === N.asUInt)
   tl_err_h_o.a_opcode := io.tl_h_i.a_opcode
   tl_err_h_o.a_param := io.tl_h_i.a_param
@@ -64,14 +63,7 @@ class TLSocket1_N(N: Int)(implicit val conf: TLConfiguration) extends Module {
   tl_err_h_o.a_data := io.tl_h_i.a_data
   tl_err_h_o.d_ready := io.tl_h_i.d_ready
 
-  // these inputs will eventually come from error responder module
-  tl_err_d_i.d_valid := false.B
-  tl_err_d_i.d_opcode := 0.U
-  tl_err_d_i.d_param := 0.U
-  tl_err_d_i.d_size := 0.U
-  tl_err_d_i.d_sink := 0.U
-  tl_err_d_i.d_source := 0.U
-  tl_err_d_i.d_data := 0.U
-  tl_err_d_i.d_error := 0.U
-  tl_err_d_i.a_ready := 0.U
+  val tl_errResp = Module(new TL_ErrResp)
+  tl_errResp.io.tl_h_i <> tl_err_h_o
+  tl_err_d_i <> tl_errResp.io.tl_d_o
 }

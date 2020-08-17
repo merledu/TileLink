@@ -1,6 +1,6 @@
 package tilelink
 import chisel3._
-import chisel3.util.Fill
+import chisel3.util._
 
 class TL_ErrResp(implicit val conf: TLConfiguration) extends Module {
   val io = IO(new Bundle {
@@ -34,7 +34,7 @@ class TL_ErrResp(implicit val conf: TLConfiguration) extends Module {
     err_rspPending := false.B
   }
 
-  io.tl_d_o.a_ready := !err_rspPending && !(err_reqPending && !io.tl_h_i.d_ready)
+  io.tl_d_o.a_ready := ~err_rspPending & ~(err_reqPending & ~io.tl_h_i.d_ready)
   io.tl_d_o.d_valid := err_reqPending || err_rspPending
   io.tl_d_o.d_data := Fill(conf.TL_DW/4, "hf".U)  //Return all F. If dw = 32 then 32/4 = 8 characters all 0xf
   io.tl_d_o.d_source := err_source

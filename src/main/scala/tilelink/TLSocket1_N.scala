@@ -7,7 +7,7 @@ class TLSocket1_N(N: Int)(implicit val conf: TLConfiguration) extends Module {
     val tl_h_i = Flipped(new TL_H2D)
     val tl_h_o = new TL_D2H
 
-    val tl_d_o = Vec(N, new TL_H2D)
+    val tl_d_o = Vec(N+1, new TL_H2D)
     val tl_d_i = Flipped(Vec(N, new TL_D2H))
 
     val dev_sel = Input(UInt(log2Ceil(N+1).W))

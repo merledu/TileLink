@@ -9,7 +9,7 @@ TileLink has been implemented in `rocketchip` but it takes use of _diplomacy_ wh
 
 ## Contributors 
 <figure>
-<a href="https://github.com/remarkablemark">
+<a href="https://github.com/hadirkhan10">
   <img src="https://github.com/hadirkhan10.png?size=60">
 </a>
   <br>

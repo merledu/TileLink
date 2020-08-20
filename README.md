@@ -12,5 +12,6 @@ TileLink has been implemented in `rocketchip` but it takes use of _diplomacy_ wh
 <a href="https://github.com/remarkablemark">
   <img src="https://github.com/hadirkhan10.png?size=60">
 </a>
+  <br>
     <figcaption>Hadir Khan</figcaption>
 </figure>

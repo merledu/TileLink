@@ -28,3 +28,10 @@ object TL_ErrRespMain extends App {
     c => new TL_ErrRespUnitTester(c)
   }
 }
+
+object ArbiterMain extends App {
+  implicit val tl_conf = TLConfiguration()
+  iotesters.Driver.execute(args, () => new Arbiter(3)) {
+    c => new ArbiterUnitTester(c)
+  }
+}

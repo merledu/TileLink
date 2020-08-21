@@ -8,5 +8,17 @@ class TLSocketM_1(M: Int)(implicit val conf:TLConfiguration) extends Module {
     val tl_d_o = new TL_H2D
     val tl_d_i = Flipped(new TL_D2H)
   })
+  val hRequest = Vec(M, Wire(Bool()))
+  val hGrant = Vec(M, Wire(Bool()))
 
+//  val arbReady = Wire(Bool())
+//  val arbValid = Wire(Bool())
+//  val arbData = Wire(new TL_H2D)
+
+
+  for(i <- 0 until M) {
+    hRequest(i) := io.tl_h_i(i).a_valid
+  }
+
+  //arbReady := io.tl_d_i.a_ready
 }

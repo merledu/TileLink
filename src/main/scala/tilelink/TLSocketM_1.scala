@@ -12,7 +12,6 @@ class TLSocketM_1(M: Int)(implicit val conf:TLConfiguration) extends Module {
   val STIDW = log2Ceil(M) // the bits required for identifying hosts.
   val tl_h2d = Wire(Vec(M, Flipped(new TL_H2D))) // create an intermediate bundles of wire for capturing the host request
   val hRequest = Wire(Vec(M, Bool())) // this bundle of wires is used to have the valid signals of all hosts.
-  val hGrant = Wire(Vec(M, Bool()))
   val respReady = Wire(Vec(M, Bool()))
   val respValid = Wire(Vec(M, Bool()))
 
@@ -47,7 +46,6 @@ class TLSocketM_1(M: Int)(implicit val conf:TLConfiguration) extends Module {
   arb.io.ready_i := io.tl_d_i.a_ready
   arb.io.data_i <> tl_h2d
 
-  hGrant := arb.io.gnt_o
   io.tl_d_o.a_valid := arb.io.valid_o
   io.tl_d_o.a_opcode := arb.io.data_o.a_opcode
   io.tl_d_o.a_param := arb.io.data_o.a_param

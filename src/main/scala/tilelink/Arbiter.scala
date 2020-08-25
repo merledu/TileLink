@@ -1,5 +1,11 @@
 package tilelink
 import chisel3._
+import chisel3.stage.{ChiselGeneratorAnnotation, ChiselStage}
+
+object Arbiter extends App {
+  implicit val conf: TLConfiguration = TLConfiguration()
+  (new ChiselStage).execute(args, Seq(ChiselGeneratorAnnotation(() => new Arbiter(3))))
+}
 
 class Arbiter(M: Int)(implicit val conf: TLConfiguration) extends Module {
   val io = IO(new Bundle {
@@ -23,28 +29,4 @@ class Arbiter(M: Int)(implicit val conf: TLConfiguration) extends Module {
       io.gnt_o(i) := false.B
     }
   }
-
-
-  // Host: 4
-  // Device : 1
-  // host(1).a_valid = true
-  // host(n-1).a_valid = false
-
-  // io.data_o := io.data_i(M-1) -> host(3).tl_h2d bundle will get selected as output data by default
-  // for(i <- M-2 to 0 by -1) {
-  //  when(io.req_i(i)) {
-  //    io.data_o := io.data_i(i)
-  //  }
-  // }
-
-  // ArbiterCtrl(req_i)
-
-  // ArbiterCtrl {
-  //    true.B
-  // }
-
-  // req_i.tail -> (true, false, false).init -> (true, false).scanLeft -> (false || true)
-  // Seq(false, true, true).map(!_) -> List(true, false, false)
-  // true +: List(false, false, false) -> List(true, true, false, false)
-  // grant = List(true, true, false, false)
 }

@@ -9,8 +9,8 @@ class ArbiterTest extends FlatSpec with ChiselScalatestTester with Matchers {
 
   it should "connect host 0 with device" in {
     test(new Arbiter(2)) { c =>
-      c.io.req_i(0).poke(true.B)
-      c.io.req_i(1).poke(false.B)
+      c.io.req_i(0).poke(false.B)
+      c.io.req_i(1).poke(true.B)
 
       // Host 1 data
       c.io.data_i(0).a_data.poke(0.U)
@@ -37,10 +37,10 @@ class ArbiterTest extends FlatSpec with ChiselScalatestTester with Matchers {
       // the slave is ready to accept the data
       c.io.ready_i.poke(true.B)
 
-      c.io.gnt_o(0).expect(true.B)
-      c.io.gnt_o(1).expect(false.B)
+      c.io.gnt_o(0).expect(false.B)
+      c.io.gnt_o(1).expect(true.B)
       c.io.valid_o.expect(true.B)
-      c.io.data_o.a_opcode.expect(4.U)
+      c.io.data_o.a_opcode.expect(1.U)
     }
   }
 }

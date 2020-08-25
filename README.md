@@ -1,5 +1,6 @@
-# TileLink
+# TileLink ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hadirkhan10/TileLink/test)
 This project deals with creating TileLink bus protocol API with Chisel and generating the RTL for synthesis
+
 
 ## Description
 TileLink is a protocol developed at SiFive which is used for On-Chip communication. This project implements the TileLink Uncached Lightweight (TL-UL) protocol as described in the specification. This project conforms to the [1.7.1 specification](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf). 

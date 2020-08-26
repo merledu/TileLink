@@ -13,10 +13,14 @@ case class TLConfiguration() {
 }
 
 case class AddressMap() {
-  val ADDR_SPACE_GPIO = "h40010000".U
-  val ADDR_MASK_GPIO = "h00000fff".U
+  val ADDR_SPACE_UART = "h40000000".U(32.W)
+  val ADDR_MASK_UART = "h00000fff".U(32.W)
+  val ADDR_SPACE_GPIO = "h40010000".U(32.W)
+  val ADDR_MASK_GPIO = "h00000fff".U(32.W)
 }
 
 object TL_Peripherals {
+  // The device map will have N-1 devices data for the 1:N socket.
+  // So if we have a 1:4 socket then the device map should have 4 devices from 0 to 3.
   val deviceMap: Map[String, UInt] = Map("gpio" -> 0.U, "uart" -> 1.U)
 }

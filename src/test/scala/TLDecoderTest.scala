@@ -20,4 +20,11 @@ class TLDecoderTest extends FlatSpec with ChiselScalatestTester with Matchers {
       c.io.dev_sel.expect(TL_Peripherals.deviceMap("uart"))
     }
   }
+
+  it should "set the dev_sel to point to error responder" in {
+    test(new TL_Decoder(2, addrMap)) {c =>
+      c.io.addr_i.poke("h4fffffff".U)
+      c.io.dev_sel.expect(2.U)
+    }
+  }
 }

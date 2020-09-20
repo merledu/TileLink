@@ -1,11 +1,11 @@
 package tilelink
 import chisel3._
 import chisel3.stage.{ChiselGeneratorAnnotation, ChiselStage}
-
-object Arbiter extends App {
-  implicit val conf: TLConfiguration = TLConfiguration()
-  (new ChiselStage).execute(args, Seq(ChiselGeneratorAnnotation(() => new Arbiter(3))))
-}
+//
+//object Arbiter extends App {
+//  implicit val conf: TLConfiguration = TLConfiguration()
+//  (new ChiselStage).execute(args, Seq(ChiselGeneratorAnnotation(() => new Arbiter(3))))
+//}
 
 class Arbiter(M: Int)(implicit val conf: TLConfiguration) extends Module {
   val io = IO(new Bundle {

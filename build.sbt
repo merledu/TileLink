@@ -26,7 +26,7 @@ def javacOptionsVersion(scalaVersion: String): Seq[String] = {
   }
 }
 
-name := "tilelink"
+name := "merl/uit/tilelink"
 
 version := "3.3.0"
 

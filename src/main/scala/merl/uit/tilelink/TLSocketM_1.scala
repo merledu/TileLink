@@ -1,4 +1,5 @@
-package tilelink
+package merl.uit.tilelink
+
 import chisel3._
 import chisel3.util.{Cat, log2Ceil}
 

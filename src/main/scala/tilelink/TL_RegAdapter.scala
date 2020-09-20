@@ -1,6 +1,6 @@
 package tilelink
 import chisel3._
-import chisel3.util.Cat
+import chisel3.util.{Cat, Fill}
 
 /**
   TL-UL adapter for the register interface used by peripherals
@@ -61,7 +61,7 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
     reqId := io.tl_i.a_source
     reqSz := io.tl_i.a_size
     respOp := Mux(rd_req, TL_D_Opcode.accessAckData, TL_D_Opcode.accessAck)
-    rdata := Mux(err_internal, 1.U, io.rdata_i)
+    rdata := Mux(err_internal, Fill(regDw, 1.U), io.rdata_i)  // return all 1111s if err_internal = true
     error := io.error_i || err_internal
   } .elsewhen(d_ack) {
     outstanding := 0.U

@@ -36,7 +36,7 @@ class TL_HostAdapter(implicit val conf: TLConfiguration) extends Module {
   io.tl_o.a_size := wordSize.asUInt(conf.TL_SZW.W)
   io.tl_o.a_mask := tl_be
   io.tl_o.a_source := tl_source
-  io.tl_o.a_address := io.addr_i
+  io.tl_o.a_address := Cat(io.addr_i(31, wordSize), 0.U(wordSize.W))  // word aligned addressing. 0, 4, 8, 12 ...
   io.tl_o.a_data := io.wdata_i
   io.tl_o.d_ready := true.B
 

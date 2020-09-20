@@ -1,4 +1,5 @@
-package tilelink
+package merl.uit.tilelink
+
 import chisel3._
 
 object TL_D_Opcode {

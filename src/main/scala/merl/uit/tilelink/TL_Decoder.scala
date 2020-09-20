@@ -1,4 +1,5 @@
-package tilelink
+package merl.uit.tilelink
+
 import chisel3._
 
 class TL_Decoder(N: Int, addrMap: AddressMap)(implicit val conf: TLConfiguration) extends Module {

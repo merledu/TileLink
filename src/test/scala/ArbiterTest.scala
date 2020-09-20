@@ -2,6 +2,7 @@ package tilelink
 import org.scalatest._
 import chiseltest._
 import chisel3._
+import merl.uit.tilelink.{Arbiter, TLConfiguration}
 
 class ArbiterTest extends FlatSpec with ChiselScalatestTester with Matchers {
   implicit val tl_conf = TLConfiguration()

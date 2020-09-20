@@ -2,6 +2,7 @@ package tilelink
 import org.scalatest._
 import chiseltest._
 import chisel3._
+import merl.uit.tilelink.{TLConfiguration, TLSocket1_N, TL_A_Opcode}
 
 class TLSocket1toNTest extends FlatSpec with ChiselScalatestTester with Matchers {
   behavior of "TL-UL 1:N socket connecting single host with N devices"

@@ -1,4 +1,5 @@
-package tilelink
+package merl.uit.tilelink
+
 import chisel3._
 
 // TileLink Device To Host (Channel D ports) TL_D2H

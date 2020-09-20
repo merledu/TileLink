@@ -2,6 +2,7 @@ package tilelink
 import org.scalatest._
 import chiseltest._
 import chisel3._
+import merl.uit.tilelink.{AddressMap, TLConfiguration, TL_Decoder, TL_Peripherals}
 
 class TLDecoderTest extends FlatSpec with ChiselScalatestTester with Matchers {
   behavior of "TL Decoder"

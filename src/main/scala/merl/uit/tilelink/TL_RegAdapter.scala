@@ -7,7 +7,7 @@ import chisel3.util.{Cat, Fill}
   TL-UL adapter for the register interface used by peripherals
  */
 
-class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(implicit val conf: TLConfiguration) extends Module {
+class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32, forSRAM: Bool = false.B)(regBw: Int = regDw/8)(implicit val conf: TLConfiguration) extends Module {
   val io = IO(new Bundle {
     // TL-UL interface
     val tl_i = Flipped(new TL_H2D())
@@ -26,7 +26,9 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   val a_ack = Wire(Bool())
   val d_ack = Wire(Bool())
 
-  val rdata = RegInit(0.U(regDw.W))
+  val rdata_q = RegInit(0.U(regDw.W))
+  val rdata = Wire(UInt(regDw.W))
+  rdata := io.rdata_i
   val error = RegInit(0.U(1.W))
 
   val err_internal = Wire(Bool())
@@ -62,7 +64,7 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
     reqId := io.tl_i.a_source
     reqSz := io.tl_i.a_size
     respOp := Mux(rd_req, TL_D_Opcode.accessAckData, TL_D_Opcode.accessAck)
-    rdata := Mux(err_internal, Fill(regDw, 1.U), io.rdata_i)  // return all 1111s if err_internal = true
+    rdata_q := Mux(err_internal, Fill(regDw, 1.U), io.rdata_i)  // return all 1111s if err_internal = true
     error := io.error_i || err_internal
   } .elsewhen(d_ack) {
     outstanding := 0.U
@@ -75,7 +77,7 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(impli
   io.tl_o.d_size := reqSz
   io.tl_o.d_source := reqId
   io.tl_o.d_sink := 0.U
-  io.tl_o.d_data := rdata
+  io.tl_o.d_data := Mux(forSRAM, rdata, rdata_q)
   io.tl_o.d_error := error
 
   err_internal := addr_align_err | tl_err

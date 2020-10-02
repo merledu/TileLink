@@ -70,7 +70,7 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32, forSRAM: Bool = false.B)(re
     outstanding := 0.U
   }
 
-  io.tl_o.a_ready := !outstanding
+  io.tl_o.a_ready := Mux(forSRAM, true.B, !outstanding)   // setting device adapter to be always ready in case it is used for sram
   io.tl_o.d_valid := outstanding
   io.tl_o.d_opcode := respOp
   io.tl_o.d_param := 0.U

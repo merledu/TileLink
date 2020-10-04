@@ -7,7 +7,7 @@ import chisel3.util.{Cat, Fill}
   TL-UL adapter for the register interface used by peripherals
  */
 
-class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32, forSRAM: Bool = false.B)(regBw: Int = regDw/8)(implicit val conf: TLConfiguration) extends Module {
+class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32)(regBw: Int = regDw/8)(implicit val conf: TLConfiguration) extends Module {
   val io = IO(new Bundle {
     // TL-UL interface
     val tl_i = Flipped(new TL_H2D())
@@ -27,8 +27,6 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32, forSRAM: Bool = false.B)(re
   val d_ack = Wire(Bool())
 
   val rdata_q = RegInit(0.U(regDw.W))
-  val rdata = Wire(UInt(regDw.W))
-  rdata := io.rdata_i
   val error = RegInit(0.U(1.W))
 
   val err_internal = Wire(Bool())
@@ -70,14 +68,14 @@ class TL_RegAdapter(regAw: Int = 8, regDw: Int = 32, forSRAM: Bool = false.B)(re
     outstanding := 0.U
   }
 
-  io.tl_o.a_ready := Mux(forSRAM, true.B, !outstanding)   // setting device adapter to be always ready in case it is used for sram
+  io.tl_o.a_ready := !outstanding
   io.tl_o.d_valid := outstanding
   io.tl_o.d_opcode := respOp
   io.tl_o.d_param := 0.U
   io.tl_o.d_size := reqSz
   io.tl_o.d_source := reqId
   io.tl_o.d_sink := 0.U
-  io.tl_o.d_data := Mux(forSRAM, rdata, rdata_q)
+  io.tl_o.d_data := rdata_q
   io.tl_o.d_error := error
 
   err_internal := addr_align_err | tl_err

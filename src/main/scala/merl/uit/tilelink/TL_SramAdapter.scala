@@ -11,7 +11,7 @@ class TL_SramAdapter(sramAw: Int, sramDw: Int, forFetch: Bool = false.B)(implici
     val we_o = Output(Bool())
     val addr_o = Output(UInt(sramAw.W))
     val wdata_o = Output(UInt(sramDw.W))
-    val wmask_o = Output(UInt(conf.TL_DBW.W))
+    val wmask_o = Output(Vec(conf.TL_DBW, Bool()))
     val rdata_i = Input(UInt(sramDw.W))
     //val rerror_i = Input(UInt(2.W))
   })
@@ -51,7 +51,9 @@ class TL_SramAdapter(sramAw: Int, sramDw: Int, forFetch: Bool = false.B)(implici
   io.we_o := wr_req && !err_internal
   io.addr_o := Cat(io.tl_i.a_address(sramAw-1, 2), 0.U(2.W)) // word aligned address
   io.wdata_o := io.tl_i.a_data
-  io.wmask_o := io.tl_i.a_mask
+  for(i <- 0 until conf.TL_DBW) {
+   io.wmask_o(i) := io.tl_i.a_mask(i).asBool()
+  }
 
   when(a_ack) {
     outstanding := 1.U

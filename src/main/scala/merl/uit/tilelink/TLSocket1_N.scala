@@ -44,7 +44,8 @@ class TLSocket1_N(N: Int)(implicit val conf: TLConfiguration) extends Module {
     // if dev_sel matches no devices then it means the dev_sel is out of range and
     // we connect it with the error responder device which will route an error
     when(io.dev_sel === id.asUInt) {
-      io.tl_h_o.a_ready := io.tl_h_i.a_valid && io.tl_d_i(id).a_ready
+//      io.tl_h_o.a_ready := io.tl_h_i.a_valid && io.tl_d_i(id).a_ready
+      io.tl_h_o.a_ready := io.tl_d_i(id).a_ready
       io.tl_h_o.d_valid := io.tl_d_i(id).d_valid
       io.tl_h_o.d_opcode := io.tl_d_i(id).d_opcode
       io.tl_h_o.d_param := io.tl_d_i(id).d_param

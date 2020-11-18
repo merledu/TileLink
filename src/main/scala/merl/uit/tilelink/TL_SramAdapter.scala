@@ -8,10 +8,10 @@ class TL_SramAdapter(sramAw: Int, sramDw: Int, forFetch: Bool = false.B)(implici
     val tl_i = Flipped(new TL_H2D())
     val tl_o = new TL_D2H()
     // SRAM interface
-    val we_o = Output(Bool())
+    val we_o = Output(Vec(conf.TL_DBW, Bool()))
     val addr_o = Output(UInt(sramAw.W))
     val wdata_o = Output(UInt(sramDw.W))
-    val wmask_o = Output(Vec(conf.TL_DBW, Bool()))
+    //val wmask_o = Output(Vec(conf.TL_DBW, Bool()))
     val rdata_i = Input(UInt(sramDw.W))
     //val rerror_i = Input(UInt(2.W))
   })
@@ -48,11 +48,19 @@ class TL_SramAdapter(sramAw: Int, sramDw: Int, forFetch: Bool = false.B)(implici
   wr_req := a_ack && ((io.tl_i.a_opcode === TL_A_Opcode.putFullData) || (io.tl_i.a_opcode === TL_A_Opcode.putPartialData))
   rd_req := a_ack && (io.tl_i.a_opcode === TL_A_Opcode.get)
 
-  io.we_o := wr_req && !err_internal
+ // io.we_o := wr_req && !err_internal
   io.addr_o := Cat(io.tl_i.a_address(sramAw-1, 2), 0.U(2.W)) // word aligned address
   io.wdata_o := io.tl_i.a_data
-  for(i <- 0 until conf.TL_DBW) {
-   io.wmask_o(i) := io.tl_i.a_mask(i).asBool()
+
+
+  when(wr_req && !err_internal) {
+    for(i <- 0 until conf.TL_DBW) {
+      io.we_o(i) := io.tl_i.a_mask(i).asBool()
+    }
+  } .otherwise {
+    for(i <- 0 until conf.TL_DBW) {
+      io.we_o(i) := false.B
+    }
   }
 
   when(a_ack) {
